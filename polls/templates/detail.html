@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+	<h1>Univercity Details</h1>
+	<br>
+	<h6>Name: {{ uni.name }}</h6>
+	<br>
+	<h6>Address: {{ uni.address }}</h6>
+	<br>
+	<h6>Subjects:{% for i in uni.subjects.all %}
+		{{i}}
+		{% if not forloop.last %},
+		{% endif %}
+	{% endfor %}
+	</h6>
+	<br>
+	<a href="{% url 'delete' uni.id %}"><button class="btn btn-danger">delete</button></a>
+</div>
+{% endblock  %}
+	

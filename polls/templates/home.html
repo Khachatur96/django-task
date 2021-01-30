@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+		{% block content %}
+	  <div class="container">
+    <div class="row">
+        <table class="col-lg-5"> 
+            <tr>
+              <th>Univercity</th>
+              <th>Subject</th>
+            </tr>
+       
+            {% for university in universitis %}
+              <tr> 
+                <td>
+                  <a href="{% url 'detail' university.id %}">{{university.name}}</a>
+                </td> 
+               
+              <td>
+                {% for i in university.subjects.all %}
+
+                  {{i}}
+                  {% if not forloop.last %}, 
+                  {% endif %}
+              {% endfor %} 
+              </td> 
+          </tr> 
+         {% endfor %}
+
+        </table> 
+
+        <form method="post">
+          <h3>Add your univercity on table.</h3>
+          {% csrf_token %}
+
+          <br>
+          {{form.name.label}}
+          {{form.name}}
+          <br>
+          <br>
+          {{form.address.label}}
+          {{form.address}}
+          <br>
+          <br>
+          {{form.subjects.label}}
+          {{form.subjects}}
+          <br>
+          <br>
+          <!-- {{form.subjects.error}} -->
+
+          {{form.non_field_errors}}
+          <button class="btn btn-success" type="submit" >Confirm</button>
+        </form>
+      </div>
+    </div>
+{% endblock %}
